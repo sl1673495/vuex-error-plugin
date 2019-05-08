@@ -23,3 +23,19 @@ const store = new Vuex.Store({
 }
 
 ```
+
+#### 注意点
+action支持两种风格 如果用普通的promise 需要把promise return出去
+如果用async函数则不需要
+```
+fetchTodos ({commit}) {
+    return model.getAllTodos().then(data => {
+      commit('fillTodos', data)
+    })
+  }
+// 或
+async fetchTodos ({commit}) {
+    const data = await model.getAllTodos()
+    commit('fillTodos', data)
+  }  
+```
